@@ -6,6 +6,7 @@ class MainMenu
 public:
 	void displayMenu();
 	MainMenu();
+	virtual ~MainMenu();
 
 private:
 	bool exit;

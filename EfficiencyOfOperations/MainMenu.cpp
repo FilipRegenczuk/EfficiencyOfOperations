@@ -1,4 +1,4 @@
-﻿/* Klasa mainMenu ma za zadanie wyœwietlaæ menu g³ówne programu oraz wywo³ywaæ funkcje struktur */
+﻿/* Klasa mainMenu ma za zadanie wyswietlanie menu glowne programu oraz wywoluje funkcje struktur */
 
 #include <iostream>
 #include "MainMenu.h"
@@ -11,20 +11,24 @@ MainMenu::MainMenu()
 	exit = true;
 }
 
+MainMenu::~MainMenu()
+{
+}
+
 
 
 void MainMenu::displayMenu()
 {
 	while (exit)
 	{
-		cout << "MENU GLOWNE" << endl;
-		cout << "********************************************************\n" << endl;
-		cout << "Wybierz strukture, na ktorej chcesz wykonywac operacje:" << endl;
-		cout << "(1) Tablica" << endl;
-		cout << "(2) Lista" << endl;
-		cout << "(3) Kopiec" << endl;
-		cout << "(4) Drzewo czerwono-czarne" << endl;
-		cout << "(5) Aby wyjsc z programu\n" << endl;
+		cout << "MENU GLOWNE"													<< endl;
+		cout << "********************************************************\n"	<< endl;
+		cout << "Wybierz strukture, na ktorej chcesz wykonywac operacje:"		<< endl;
+		cout << "(1) Tablica"													<< endl;
+		cout << "(2) Lista"														<< endl;
+		cout << "(3) Kopiec"													<< endl;
+		cout << "(4) Drzewo czerwono-czarne"									<< endl;
+		cout << "(5) Aby wyjsc z programu\n"									<< endl;
 
 		cout << "Wprowadz wartosc: ";
 		cin >> var;
@@ -67,18 +71,18 @@ void MainMenu::displayArray()
 
 	while (exitA)
 	{
-		cout << "TABLICA" << endl;
-		cout << "********************************************************\n" << endl;
-		cout << "Wybierz operacje:" << endl;
-		cout << "(1) Dodaj elementy z przodu" << endl;
-		cout << "(2) Dodaj elementy z tylu" << endl;
-		cout << "(3) Dodaj elementy w losowe miejsce" << endl;
-		cout << "(4) Usun elementy z przodu" << endl;
-		cout << "(5) Usun elementy z tylu" << endl;
-		cout << "(6) Usun elementy z losowego miejsca" << endl;
-		cout << "(7) Wyszukaj element" << endl;
-		cout << "(8) Wypisz tablice" << endl;
-		cout << "(5) Wyjdz" << endl;
+		cout << "TABLICA"														<< endl;
+		cout << "********************************************************\n"	<< endl;
+		cout << "Wybierz operacje:"												<< endl;
+		cout << "(1) Dodaj elementy z przodu"									<< endl;
+		cout << "(2) Dodaj elementy z tylu"										<< endl;
+		cout << "(3) Dodaj elementy w losowe miejsce"							<< endl;
+		cout << "(4) Usun elementy z przodu"									<< endl;
+		cout << "(5) Usun elementy z tylu"										<< endl;
+		cout << "(6) Usun elementy z losowego miejsca"							<< endl;
+		cout << "(7) Wyszukaj element"											<< endl;
+		cout << "(8) Wypisz tablice"											<< endl;
+		cout << "(5) Wyjdz"														<< endl;
 
 		cout << "Wprowadz wartosc: ";
 		cin >> var;
