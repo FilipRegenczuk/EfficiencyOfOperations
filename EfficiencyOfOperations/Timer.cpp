@@ -33,7 +33,7 @@ void Timer::timeStop()
 	if (plik.good())
 	{
 		plik.seekg(0, plik.end);
-		plik << (1000000.0 * elapsed) / frequency << endl;
+		plik << (1000000.0 * elapsed) / frequency << std::endl;
 		plik.flush();
 		plik.close();
 	}
