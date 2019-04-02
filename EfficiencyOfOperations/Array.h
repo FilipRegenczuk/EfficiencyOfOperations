@@ -19,7 +19,4 @@ public:
 	int search(int elt);				//znajdz element
 	void printArray();					// wypisz tablice
 	void readFile(int value);			// wczytaj dane z pliku
-
-
-
 };
