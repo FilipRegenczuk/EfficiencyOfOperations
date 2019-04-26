@@ -7,6 +7,8 @@
 #include <iostream>
 #include <fstream>
 
+
+
 Timer::Timer()
 {
 }
@@ -15,33 +17,35 @@ Timer::~Timer()
 {
 }
 
-void Timer::timeStart()
+void Timer::timerStart()
 {
 	QueryPerformanceFrequency((LARGE_INTEGER *) & frequency);
 	start = readQPC();
 }
 
-void Timer::timeStop()
+void Timer::timerStop()
 {
 	elapsed = readQPC() - start;
-	std::cout << "Czas [s] = " << fixed << setprecision(3) << (float)elapsed / frequency << std::endl;
-	std::cout << "Czas [ms] = " << setprecision(0) << (1000.0 * elapsed) / frequency << std::endl;
-	std::cout << "Czas [us] = " << setprecision(3) << (1000000.0 * elapsed) / frequency << std::endl << std::endl;
+	std::cout << "Czas [s] = " << std::fixed << std::setprecision(3) << (float)elapsed / frequency << std::endl;
+	std::cout << "Czas [ms] = " << std::setprecision(0) << (1000.0 * elapsed) / frequency << std::endl;
+	std::cout << "Czas [us] = " << std::setprecision(3) << (1000000.0 * elapsed) / frequency << std::endl << std::endl;
 
-	fstream plik;
-	plik.open("pomiary.txt");
-	if (plik.good())
+	std::fstream file;
+	file.open("pomiary.txt");
+	if (file.good())
 	{
-		plik.seekg(0, plik.end);
-		plik << (1000000.0 * elapsed) / frequency << std::endl;
-		plik.flush();
-		plik.close();
+		file.seekg(0, file.end);
+		file << (1000000.0 * elapsed) / frequency << std::endl;
+		file.flush();
+		file.close();
 	}
 }
 
 long long int Timer::readQPC()
 {
-	return 0;
+	LARGE_INTEGER count;
+	QueryPerformanceCounter(&count);
+	return((long long int)count.QuadPart);
 }
 
 

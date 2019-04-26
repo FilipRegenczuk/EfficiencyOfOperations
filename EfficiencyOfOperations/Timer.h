@@ -7,7 +7,7 @@ public:
 	long long int frequency, start, elapsed;
 	Timer();
 	virtual ~Timer();
-	void timeStart();
-	void timeStop();
+	void timerStart();
+	void timerStop();
 	long long int readQPC();
 };
