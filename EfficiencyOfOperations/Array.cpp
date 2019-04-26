@@ -61,7 +61,7 @@ void Array::pushFront(int elt)
 }
 
 
-void Array::pushRand(int elt, int ix)
+void Array::push(int elt, int ix)
 {
 	n++;								// zwiekszenie liczby elementow
 	int * new_arr = new int[n - 1];		// inicjalizacja tymczasowej tablicy

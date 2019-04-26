@@ -10,7 +10,7 @@ public:
 
 private:
 	bool exit;
-	char var;
+	int var;
 	void displayArray();
 	void displayList();
 	void displayHeap();

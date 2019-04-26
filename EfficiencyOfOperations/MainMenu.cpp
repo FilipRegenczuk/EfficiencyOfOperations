@@ -37,23 +37,23 @@ void MainMenu::displayMenu()
 
 		switch (var)
 		{
-		case '1':
+		case 1:
 			displayArray();
 			break;
 
-		case '2':
+		case 2:
 			displayList();
 			break;
 
-		case '3':
+		case 3:
 			displayHeap();
 			break;
 
-		case '4':
+		case 4:
 			displayTree();
 			break;
 
-		case '5':
+		case 5:
 			exit = false;
 			break;
 		}
@@ -64,7 +64,7 @@ void MainMenu::displayMenu()
 void MainMenu::displayArray()
 {
 	bool exitA = true;
-	char varA;
+	int varA;
 	int elemNumber;
 	Array array;
 
@@ -76,18 +76,21 @@ void MainMenu::displayArray()
 
 	while (exitA)
 	{
-		cout << "\n                       TABLICA"									<< endl;
+		cout << "\n                       TABLICA"								<< endl;
 		cout << "********************************************************\n"	<< endl;
 		cout << "Wybierz operacje:"												<< endl;
-		cout << "(1) Wypisz tablice"											<< endl;
-		cout << "(2) Dodaj elementy z przodu"									<< endl;
-		cout << "(3) Dodaj elementy z tylu"										<< endl;
-		cout << "(4) Dodaj elementy w losowe miejsce"							<< endl;
-		cout << "(5) Usun elementy z przodu"									<< endl;
-		cout << "(6) Usun elementy z tylu"										<< endl;
-		cout << "(7) Usun elementy z losowego miejsca"							<< endl;
-		cout << "(8) Wyszukaj element"											<< endl;
-		cout << "(9) Wroc do menu glownego\n"									<< endl;
+		cout << "(1)  Wypisz tablice"											<< endl;
+		cout << "(2)  Dodaj element z przodu"									<< endl;
+		cout << "(3)  Dodaj losowe elementy z przodu"							<< endl;
+		cout << "(4)  Dodaj element z tylu"										<< endl;
+		cout << "(5)  Dodaj losowe elementy z tylu"								<< endl;
+		cout << "(6)  Dodaj element w konkretne miejsce"							<< endl;
+		cout << "(7)  Dodaj losowe elementy w losowe miejsce"					<< endl;
+		cout << "(8)  Usun elementy z przodu"									<< endl;
+		cout << "(9)  Usun elementy z tylu"										<< endl;
+		cout << "(10) Usun elementy z losowego miejsca"							<< endl;
+		cout << "(11) Wyszukaj element" << endl;
+		cout << "(12) Wroc do menu glownego\n"									<< endl;
 
 		cout << "Wybrana operacja: ";
 		cin >> varA;
@@ -95,33 +98,67 @@ void MainMenu::displayArray()
 
 		switch (varA)
 		{
-		case '1':
+		case 1:
 		{
 			cout << "Tablica: ";
 			array.printArray();
 		}
 		break;
 
-		case '2':
+		case 2:
+		{
+			Timer timer;
+			int newElem;
+			cout << "Podaj wartosc elementu: ";
+			cin >> newElem;
+
+			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
+
+			array.pushFront(newElem);
+
+			timer.timerStop();
+		}
+		break;
+
+		case 3:
 		{
 			Timer timer;
 			int tmp;
 			cout << "Ile elementow chcesz dodac?" << endl;
 			cin >> tmp;
 			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
+
+			
 			if (tmp > 0)
 			{
+
 				for (int i = 0; i < tmp; i++)	// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
 				{
 					int rnd_num = rand() % 30000;
 					array.pushFront(rnd_num);
 				}
 			}
+			
 			timer.timerStop();
 		}
 		break;
 
-		case '3':
+		case 4:
+		{
+			Timer timer;
+			int newElem;
+			cout << "Podaj wartosc elementu: ";
+			cin >> newElem;
+
+			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
+
+			array.pushBack(newElem);
+
+			timer.timerStop();
+		}
+		break;
+
+		case 5:
 		{
 			Timer timer;
 			int temp;
@@ -140,7 +177,25 @@ void MainMenu::displayArray()
 		}
 		break;
 
-		case '4':
+		case 6:
+		{
+			Timer timer;
+			int newElem;
+			int position;
+			cout << "Podaj wartosc elementu: ";
+			cin >> newElem;
+			cout << "Podaj pozycje elementu (liczona od 0): ";
+			cin >> position;
+
+			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
+
+			array.push(newElem, position);
+
+			timer.timerStop();
+		}
+		break;
+
+		case 7:
 		{
 			Timer timer;
 			int tmp;
@@ -153,14 +208,14 @@ void MainMenu::displayArray()
 				{
 					int rnd_num = rand() % 30000;
 					int rnd1 = rand() % elemNumber;
-					array.pushRand(rnd_num, rnd1);
+					array.push(rnd_num, rnd1);
 				}
 			}
 			timer.timerStop();
 		}
 		break;
 
-		case '5':
+		case 8:
 		{
 			Timer timer;
 			int tmp;
@@ -178,7 +233,7 @@ void MainMenu::displayArray()
 		}
 		break;
 
-		case '6':
+		case 9:
 		{
 			Timer timer;
 			int tmp;
@@ -196,7 +251,7 @@ void MainMenu::displayArray()
 		}
 		break;
 
-		case '7':
+		case 10:
 		{
 			Timer timer;
 			int tmp;
@@ -215,7 +270,7 @@ void MainMenu::displayArray()
 		}
 		break;
 
-		case '8':
+		case 11:
 		{
 			Timer timer;
 			int tmp;
@@ -227,7 +282,7 @@ void MainMenu::displayArray()
 		}
 		break;
 
-		case '9':
+		case 12:
 		{
 			exitA = false;
 		}
