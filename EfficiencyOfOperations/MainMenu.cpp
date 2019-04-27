@@ -318,6 +318,7 @@ void MainMenu::displayArray()
 		}
 		break;
 
+		// trzynasta operacja umozliwia powrot do menu glownego
 		case 13:
 		{
 			exitA = false;
