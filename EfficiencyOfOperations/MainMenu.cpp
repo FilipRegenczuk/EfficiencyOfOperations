@@ -5,6 +5,7 @@
 #include "Timer.h"
 #include "Array.h"
 #include "List.h"
+#include "Heap.h"
 
 using namespace std;
 
@@ -113,7 +114,7 @@ void MainMenu::displayArray()
 		{
 			Timer timer;
 			int newElem;
-			cout << "Podaj wartosc elementu: ";
+			cout << "Podaj wartosc nowego elementu: ";
 			cin >> newElem;
 
 			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
@@ -151,7 +152,7 @@ void MainMenu::displayArray()
 		{
 			Timer timer;
 			int newElem;
-			cout << "Podaj wartosc elementu: ";
+			cout << "Podaj wartosc nowego elementu: ";
 			cin >> newElem;
 
 			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
@@ -189,7 +190,7 @@ void MainMenu::displayArray()
 			Timer timer;
 			int newElem;
 			int position;
-			cout << "Podaj wartosc elementu: ";
+			cout << "Podaj wartosc nowego elementu: ";
 			cin >> newElem;
 			cout << "Podaj pozycje elementu (pozycja liczona od 0): ";
 			cin >> position;
@@ -309,7 +310,7 @@ void MainMenu::displayArray()
 			Timer timer;
 			int tmp;
 			int found;
-			cout << "Podaj wartosc ktora chcesz wyszukac: ";
+			cout << "Podaj wartosc szukanego elementu: ";
 			cin >> tmp;
 
 			timer.timerStart();			// uzytkownik podaje wyszukiwana wartosc
@@ -381,7 +382,7 @@ void MainMenu::displayList()
 		{
 			Timer timer;
 			int newElem;
-			cout << "Podaj wartosc elementu: ";
+			cout << "Podaj wartosc nowego elementu: ";
 			cin >> newElem;
 
 			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
@@ -418,7 +419,7 @@ void MainMenu::displayList()
 		{
 			Timer timer;
 			int newElem;
-			cout << "Podaj wartosc elementu: ";
+			cout << "Podaj wartosc nowego elementu: ";
 			cin >> newElem;
 
 			timer.timerStart();			// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
@@ -456,7 +457,7 @@ void MainMenu::displayList()
 			Timer timer;
 			int newElem;
 			int position;
-			cout << "Podaj wartosc elementu: ";
+			cout << "Podaj wartosc nowego elementu: ";
 			cin >> newElem;
 			cout << "Podaj pozycje elementu (pozycja liczona od 0): ";
 			cin >> position;
@@ -568,8 +569,9 @@ void MainMenu::displayList()
 		{
 			Timer timer;
 			int tmp;
-			cout << "Jaki element chcesz wyszukac?" << endl;
+			cout << "Podaj wartosc szukanego elementu: " << endl;
 			cin >> tmp;					// uzytkownik podaje wyszukiwany element
+
 			timer.timerStart();		
 			list.findElement(tmp);
 			timer.timerStop();
@@ -589,6 +591,143 @@ void MainMenu::displayList()
 
 void MainMenu::displayHeap()
 {
+	bool exitA = true;
+	int varA;
+	int elemNumber;
+	Heap heap;
+	cout << "Z ilu wartosci ma zostac utworzony kopiec: " << endl;
+	cin >> elemNumber;
+	heap.readFile(elemNumber);
+
+	while (exitA)
+	{
+		cout << "                        KOPIEC"								<< endl;
+		cout << "********************************************************\n"	<< endl;
+		cout << "Wybierz operacje: "											<< endl;
+		cout << "(1) Wypisz kopiec"												<< endl;
+		cout << "(2) Dodaj element"												<< endl;
+		cout << "(3) Dodaj losowe elementy"										<< endl;
+		cout << "(4) Usun elementy"												<< endl;
+		cout << "(5) Usun wybrany element"										<< endl;
+		cout << "(6) Wyszukaj element"											<< endl;
+		cout << "(7) Wroc do menu glownego\n"									<< endl;
+		
+		cout << "Wybrana operacja: ";
+		cin >> varA;
+		cout << endl;
+
+		switch (varA)
+		{
+		// pierwsza operacja drukuje elementy kopca
+		case 1:
+		{
+			cout << "Kopiec: ";
+			heap.printBT("  ", "  ", 0);
+		}
+		break;
+
+		// druga operacja zajmuje sie dodaniem elementu o wartosci podanej przez uzytkownika
+		case 2:
+		{
+			Timer timer;
+			int newElem;
+			cout << "Ile elementow chcesz dodac?" << endl;
+			cin >> newElem;
+
+			timer.timerStart();			// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+			heap.push(newElem);
+			timer.timerStop();
+			cout << "Element zostal pomyslnie dodany" << endl << endl;
+		}
+		break;
+
+		// trzecia operacja umozliwia dodawanie wybranej ilosci losowych elementow
+		case 3:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz dodac?" << endl;
+			cin >> tmp;
+			timer.timerStart();			// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+
+			if (tmp > 0)
+			{
+				for (int i = 0; i < tmp; i++)
+				{
+					int rnd = rand() % 30000;
+					heap.push(rnd);
+				}
+			}
+			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie dodane" << endl << endl;
+		}
+		break;
+
+		// czwarta operacja zajmuje sie usuwaniem podanej przez uzytkownika liczby elementow
+		case 4:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz usunac?" << endl;
+			cin >> tmp;				//uzytkownik podaje liczbe usuwanych wartosci
+
+			if (tmp > elemNumber)
+			{
+				tmp = elemNumber;
+			}
+
+			timer.timerStart();
+
+			if (tmp > 0)
+			{
+				for (int i = 0; i < tmp; i++)
+				{
+					heap.pop();
+				}
+			}
+			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
+		}
+		break;
+
+		// piata operacja umozliwia usuwanie wybranego przez uzytkownika elementu
+		case 5:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Jaki element chcesz usunac?" << endl;
+			cin >> tmp;
+
+			timer.timerStart();			// istnieje mozliwosc usuniecia wybranego elementu
+			heap.popChosen(tmp);
+			timer.timerStop();
+			cout << "Element zostal pomyslnie usuniety" << endl << endl;
+		}
+		break;
+
+		// szosta operacja pozwala wyszukiwac elementy po wartosci
+		case 6:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Jaki element chcesz wyszukac?" << endl;
+			cin >> tmp;
+
+			timer.timerStart();		// uzytkownik podaje wyszukiwany element
+			heap.search(tmp);
+			timer.timerStop();
+		}
+		break;
+
+		// siodma operacja umozliwia powrot do menu glownego
+		case 7:
+		{
+			exitA = false;
+		}
+		break;
+		}
+	}
+
 
 }
 

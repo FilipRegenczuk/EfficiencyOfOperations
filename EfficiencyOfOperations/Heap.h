@@ -19,5 +19,4 @@ public:
 	void popChosen(int val);		// usuwanie wybranego elementu
 	void readFile(int val);			// wczytywanie wartosci z pliku
 	void printBT(std::string sp, std::string sn, int v);
-
 };
