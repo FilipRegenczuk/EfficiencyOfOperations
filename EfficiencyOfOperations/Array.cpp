@@ -158,7 +158,7 @@ void Array::popFront()
 }
 
 
-void Array::popRand(int elt)
+void Array::pop(int elt)
 {
 	if (n > 0)						// jesli sa elementy w tablicy
 	{

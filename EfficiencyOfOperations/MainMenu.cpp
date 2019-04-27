@@ -190,7 +190,7 @@ void MainMenu::displayArray()
 			int position;
 			cout << "Podaj wartosc elementu: ";
 			cin >> newElem;
-			cout << "Podaj pozycje elementu (liczona od 0): ";
+			cout << "Podaj pozycje elementu (pozycja liczona od 0): ";
 			cin >> position;
 
 			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest czas wykonania operacji
@@ -219,10 +219,11 @@ void MainMenu::displayArray()
 				}
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie dodane" << endl << endl;
 		}
 		break;
 
-
+		//  osma operacja zajmuje sie usuwaniem z przodu podanej przez uzytkownika liczby elementow
 		case 8:
 		{
 			Timer timer;
@@ -230,6 +231,7 @@ void MainMenu::displayArray()
 			cout << "Ile elementow chcesz usunac?" << endl;
 			cin >> tmp;
 			timer.timerStart();			// ilosc usuwanych liczb jest zadana przez uzytkownika
+
 			if (tmp > 0)
 			{
 				for (int i = 0; i < tmp; i++)
@@ -238,9 +240,11 @@ void MainMenu::displayArray()
 				}
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
 		}
 		break;
 
+		// dziewiata operacja zajmuje sie usuwaniem z tylu podanej przez uzytkownika liczby elementow
 		case 9:
 		{
 			Timer timer;
@@ -248,6 +252,7 @@ void MainMenu::displayArray()
 			cout << "Ile elementow chcesz usunac?" << endl;
 			cin >> tmp;
 			timer.timerStart();			 // ilosc usuwanych liczb jest zadana przez uzytkownika
+
 			if (tmp > 0)
 			{
 				for (int i = 0; i < tmp; i++)
@@ -256,41 +261,64 @@ void MainMenu::displayArray()
 				}
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
 		}
 		break;
 
+		// dziesiata operacja umozliwia usuwanie elementu z wybranej przez uzytkownika pozycji
 		case 10:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Z jakiej pozycji ma zostac usuniety element? (pozycja liczona od 0)" << endl;
+			cin >> tmp;
+
+			timer.timerStart();			// ilosc usuwanych liczb jest zadana przez uzytkownika
+			array.pop(tmp);
+			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
+		}
+		break;
+
+		// jedenasta operacja zajmuje sie usuwaniem wybranej liczby elementow z losowych pozycji
+		case 11:
 		{
 			Timer timer;
 			int tmp;
 			cout << "Ile elementow chcesz usunac?" << endl;
 			cin >> tmp;
 			timer.timerStart();			// ilosc usuwanych liczb jest zadana przez uzytkownika
+
 			if (tmp > 0)
 			{
 				for (int i = 0; i < tmp; i++)
 				{
 					int rnd = rand() % 30000;
-					array.popRand(rnd);
+					array.pop(rnd);
 				}
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
 		}
 		break;
 
-		case 11:
+		// dwunasta operacja pozwala wyszukiwac elementy po wartosci
+		case 12:
 		{
 			Timer timer;
 			int tmp;
-			cout << "Podaj wartosc ktora chcesz wyszukac: " << endl;
+			int found;
+			cout << "Podaj wartosc ktora chcesz wyszukac: ";
 			cin >> tmp;
+
 			timer.timerStart();			// uzytkownik podaje wyszukiwana wartosc
-			array.search(tmp);
+			found = array.search(tmp);
+			cout << "Pozycja szukanego elementu (jeśli element nie istnieje zwrocone zostanie -1): " << found << endl;
 			timer.timerStop();
 		}
 		break;
 
-		case 12:
+		case 13:
 		{
 			exitA = false;
 		}
