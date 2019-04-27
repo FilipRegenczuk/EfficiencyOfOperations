@@ -84,13 +84,14 @@ void MainMenu::displayArray()
 		cout << "(3)  Dodaj losowe elementy z przodu"							<< endl;
 		cout << "(4)  Dodaj element z tylu"										<< endl;
 		cout << "(5)  Dodaj losowe elementy z tylu"								<< endl;
-		cout << "(6)  Dodaj element w konkretne miejsce"							<< endl;
-		cout << "(7)  Dodaj losowe elementy w losowe miejsce"					<< endl;
+		cout << "(6)  Dodaj element na zadana pozycje"							<< endl;
+		cout << "(7)  Dodaj losowe elementy na losowe pozycje"					<< endl;
 		cout << "(8)  Usun elementy z przodu"									<< endl;
 		cout << "(9)  Usun elementy z tylu"										<< endl;
-		cout << "(10) Usun elementy z losowego miejsca"							<< endl;
-		cout << "(11) Wyszukaj element" << endl;
-		cout << "(12) Wroc do menu glownego\n"									<< endl;
+		cout << "(10) Usun element z zadanej pozycji"							<< endl;
+		cout << "(11) Usun elementy z losowych pozycji"							<< endl;
+		cout << "(12) Wyszukaj element"											<< endl;
+		cout << "(13) Wroc do menu glownego\n"									<< endl;
 
 		cout << "Wybrana operacja: ";
 		cin >> varA;
@@ -98,14 +99,16 @@ void MainMenu::displayArray()
 
 		switch (varA)
 		{
+		// pierwsza operacja drukuje wartosci tablicy
 		case 1:
 		{
-			cout << "Tablica: ";
+			cout << "Tablica: ";		
 			array.printArray();
 		}
 		break;
 
-		case 2:
+		// druga operacja zajmuje sie dodaniem z przodu elementu o wartosci podanej przez uzytkownika
+		case 2:							
 		{
 			Timer timer;
 			int newElem;
@@ -113,22 +116,21 @@ void MainMenu::displayArray()
 			cin >> newElem;
 
 			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
-
 			array.pushFront(newElem);
-
 			timer.timerStop();
+			cout << "Element zostal pomyslnie dodany" << endl << endl;
 		}
 		break;
 
-		case 3:
+		// trzecia operacja umozliwia dodawanie z przodu wybranej ilosci losowych elementow
+		case 3:			
 		{
 			Timer timer;
 			int tmp;
 			cout << "Ile elementow chcesz dodac?" << endl;
-			cin >> tmp;
+			cin >> tmp;							// pobranie od uzytkownika liczby losowych liczb
 			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
 
-			
 			if (tmp > 0)
 			{
 
@@ -138,11 +140,12 @@ void MainMenu::displayArray()
 					array.pushFront(rnd_num);
 				}
 			}
-			
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie dodane" << endl << endl;
 		}
 		break;
 
+		// czwarta operacja zajmuje sie dodaniem z tylu elementu o wartosci podanej przez uzytkownika
 		case 4:
 		{
 			Timer timer;
@@ -151,13 +154,13 @@ void MainMenu::displayArray()
 			cin >> newElem;
 
 			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
-
 			array.pushBack(newElem);
-
 			timer.timerStop();
+			cout << "Element zostal pomyslnie dodany" << endl << endl;
 		}
 		break;
 
+		// piata operacja umozliwia dodawanie z tylu wybranej ilosci losowych elementow
 		case 5:
 		{
 			Timer timer;
@@ -165,6 +168,7 @@ void MainMenu::displayArray()
 			cout << "Ile elementow chcesz dodac?" << endl;
 			cin >> temp;
 			timer.timerStart();				// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+
 			if (temp > 0)
 			{
 				for (int i = 0; i < temp; i++)
@@ -174,9 +178,11 @@ void MainMenu::displayArray()
 				}
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie dodane" << endl << endl;
 		}
 		break;
 
+		// szosta operacja zajmuje sie dodaniem elementu w wybranym miejscu i wartosci przez uzytkownika
 		case 6:
 		{
 			Timer timer;
@@ -187,14 +193,14 @@ void MainMenu::displayArray()
 			cout << "Podaj pozycje elementu (liczona od 0): ";
 			cin >> position;
 
-			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
-
+			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest czas wykonania operacji
 			array.push(newElem, position);
-
 			timer.timerStop();
+			cout << "Element zostal pomyslnie dodany" << endl << endl;
 		}
 		break;
 
+		// siodma operacja umozliwia dodawanie w losowym miejscu losowych elementow
 		case 7:
 		{
 			Timer timer;
@@ -202,6 +208,7 @@ void MainMenu::displayArray()
 			cout << "Ile elementow chcesz dodac?" << endl;
 			cin >> tmp;
 			timer.timerStart();				// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+
 			if (tmp > 0)
 			{
 				for (int i = 0; i < tmp; i++)
@@ -214,6 +221,7 @@ void MainMenu::displayArray()
 			timer.timerStop();
 		}
 		break;
+
 
 		case 8:
 		{
