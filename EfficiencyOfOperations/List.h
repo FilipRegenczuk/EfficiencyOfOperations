@@ -17,15 +17,15 @@ public:
 	List();
 	virtual ~List();
 
-	void push_front(int value);
-	void push_back(int value);
+	void pushFront(int value);
+	void pushBack(int value);
 	void pop(ListElement *element);				// funkcja usuwajaca element na podstawie wskaznika
-	void pop_head();
-	void pop_tail();
-	void show_list();							// wypisywanie listy
-	void pop_random(int value);
-	void put_before(int element, int value);	// dodaje po elemencie
-	void read_file(int value);
-	ListElement *index_find(int index);			// szuka na podstawie kolejnosci w liscie
-	ListElement *find_element(int value);		// znajdowanie wartosci na podstawie wskaznika
+	void popHead();
+	void popTail();
+	void printList();							// wypisywanie listy
+	void popRandom(int value);
+	void putBefore(int element, int value);		// dodaje po elemencie
+	void readFile(int value);
+	ListElement *indexFind(int index);			// szuka na podstawie kolejnosci w liscie
+	ListElement *findElement(int value);		// znajdowanie wartosci na podstawie wskaznika
 };

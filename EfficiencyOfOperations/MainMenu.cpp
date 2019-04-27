@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include "Timer.h"
 #include "Array.h"
+#include "List.h"
 
 using namespace std;
 
@@ -331,7 +332,180 @@ void MainMenu::displayArray()
 
 void MainMenu::displayList()
 {
+	bool exitA = true;
+	int varA;
+	int elemNumber;
+	List list;
 
+	cout << "Z ilu elementow ma byc zbudowana lista?" << endl;
+	cout << "Wprowadz wartosc: ";
+	cin >> elemNumber;
+
+	list.readFile(elemNumber);
+
+	while (exitA)
+	{
+		cout << "\n                       LISTA"								<< endl;
+		cout << "********************************************************\n"	<< endl;
+		cout << "Wybierz operacje:"												<< endl;
+		cout << "(1)  Wypisz tablice"											<< endl;
+		cout << "(2)  Dodaj element z przodu"									<< endl;
+		cout << "(3)  Dodaj losowe elementy z przodu"							<< endl;
+		cout << "(4)  Dodaj element z tylu"										<< endl;
+		cout << "(5)  Dodaj losowe elementy z tylu"								<< endl;
+		cout << "(6)  Dodaj element na zadana pozycje"							<< endl;
+		cout << "(7)  Dodaj losowe elementy na losowe pozycje"					<< endl;
+		cout << "(8)  Usun elementy z przodu"									<< endl;
+		cout << "(9)  Usun elementy z tylu"										<< endl;
+		cout << "(10) Usun element z zadanej pozycji"							<< endl;
+		cout << "(11) Usun elementy z losowych pozycji"							<< endl;
+		cout << "(12) Wyszukaj element"											<< endl;
+		cout << "(13) Wroc do menu glownego\n"									<< endl;
+
+		cout << "Wybrana operacja: ";
+		cin >> varA;
+		cout << endl;
+
+		switch (varA)
+		{
+		case 1:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz dodac?" << endl;
+			cin >> tmp;
+			timer.timerStart();			// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+
+			if (tmp > 0)
+			{
+				for (int i = 0; i < tmp; i++)
+				{
+					int rnd = rand() % 30000;
+					list.pushFront(rnd);
+				}
+			}
+			timer.timerStop();
+		}
+		break;
+
+		case 2:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz dodac?" << endl;
+			cin >> tmp;
+			timer.timerStart();			// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+
+			if (tmp > 0)
+			{
+				for (int i = 0; i < tmp; i++)
+				{
+					int rnd = rand() % 30000;
+					list.pushBack(rnd);
+				}
+			}
+			timer.timerStop();
+		}
+		break;
+
+		case 3:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz dodac?" << endl;
+			cin >> tmp;
+			timer.timerStart();
+
+			for (int i = 0; i < tmp; i++)		// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+			{
+				int rnd = rand() % 30000;
+				int rnd1 = rand() % list.n;
+				list.putBefore(rnd1, rnd);
+			}
+			timer.timerStop();
+		}
+		break;
+
+		case 4:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz usunac?" << endl;
+			cin >> tmp;				// uzytkownik podaje liczbe usuwanych elementow
+			timer.timerStart();		
+
+			if (tmp > 0)
+			{
+				for (int i = 0; i < tmp; i++)
+				{
+					list.popHead();
+				}
+			}
+			timer.timerStop();
+		}
+		break;
+
+		case 5:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz usunac?" << endl;
+			cin >> tmp;			 // uzytkownik podaje liczbe usuwanych elementow
+			timer.timerStart(); 
+
+			if (tmp > 0)
+			{
+				for (int i = 0; i < tmp; i++)
+				{
+					list.popTail();
+				}
+			}
+			timer.timerStop();
+		}
+		break;
+
+		case 6:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz usunac?" << endl;
+			cin >> tmp;						 // uzytkownik podaje liczbe usuwanych elementow
+			timer.timerStart();
+
+			for (int i = 0; i < tmp; i++)
+			{
+				int rnd = rand() % elemNumber;
+				list.popRandom(rnd);
+			}
+			timer.timerStop();
+		}
+		break;
+
+		case 7:
+		{
+			list.printList();
+		}
+		break;
+
+		case 8:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Jaki element chcesz wyszukac?" << endl;
+			cin >> tmp;					// uzytkownik podaje wyszukiwany element
+			timer.timerStart();		
+			list.findElement(tmp);
+			timer.timerStop();
+		}
+		break;
+
+		case 9:
+		{
+			exitA = false;
+		}
+		break;
+		}
+	}
 }
 
 

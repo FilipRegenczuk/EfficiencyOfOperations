@@ -18,10 +18,10 @@ List::List()
 List::~List() 
 {
 	while (head)
-		pop_head();		// usuwanie elementów, dopoki istnieja
+		popHead();		// usuwanie elementów, dopoki istnieja
 }
 
-void List::push_front(int value) 
+void List::pushFront(int value) 
 {
 	n++;
 	ListElement *p = new ListElement;	// wskaznik na nowy element listy
@@ -36,7 +36,7 @@ void List::push_front(int value)
 		tail = p;				// w przeciwnym wypadku ten element jest tez ostatni
 }
 
-void List::push_back(int value) 
+void List::pushBack(int value) 
 {
 	n++;
 	ListElement *p = new ListElement;
@@ -70,17 +70,17 @@ void List::pop(ListElement *element)
 	}
 }
 
-void List::pop_head() 
+void List::popHead() 
 {
 	pop(head);
 }
 
-void List::pop_tail()
+void List::popTail()
 {
 	pop(tail);
 }
 
-void List::show_list() 
+void List::printList() 
 {
 	ListElement *p;
 	p = head;
@@ -92,7 +92,7 @@ void List::show_list()
 	cout << endl;
 }
 
-ListElement *List::find_element(int value)
+ListElement *List::findElement(int value)
 {
 	ListElement *p = head;
 	while (p) 
@@ -107,17 +107,17 @@ ListElement *List::find_element(int value)
 	return NULL;				// jezli nic nie znaleziono
 }
 
-void List::pop_random(int index) 
+void List::popRandom(int index) 
 {
-	pop(index_find(index));
+	pop(indexFind(index));
 }
 
-void List::put_before(int element, int value) 
+void List::putBefore(int element, int value) 
 {
 	n++;
-	ListElement *before = index_find(element);		// znajduje wskaznik na element, przed ktorym mamy wstawic nowy
+	ListElement *before = indexFind(element);		// znajduje wskaznik na element, przed ktorym mamy wstawic nowy
 	if (before == head)
-		push_front(value);
+		pushFront(value);
 	else 
 	{
 		ListElement *new_element = new ListElement;		// tworzymy nowy element
@@ -128,7 +128,7 @@ void List::put_before(int element, int value)
 	}
 }
 
-void List::read_file(int value)
+void List::readFile(int value)
 {
 	string str;
 	fstream file("20000.txt", ios::in);
@@ -140,13 +140,13 @@ void List::read_file(int value)
 			char tmp[sizeof(str)];
 			strcpy_s(tmp, str.c_str());
 			int number = atoi(tmp);
-			push_back(number);
+			pushBack(number);
 		}
 		file.close();
 	}
 }
 
-ListElement *List::index_find(int index) 
+ListElement *List::indexFind(int index) 
 {
 	int i = 0;
 	ListElement *p = head;
