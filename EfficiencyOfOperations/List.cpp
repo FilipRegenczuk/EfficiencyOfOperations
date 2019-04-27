@@ -99,7 +99,7 @@ ListElement *List::findElement(int value)
 	{
 		if (p->data == value)
 		{
-			cout << "Element was found." << endl;
+			cout << "Element zostal znaleziony" << endl;
 			return p;
 		}
 		p = p->next;

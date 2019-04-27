@@ -100,7 +100,7 @@ void MainMenu::displayArray()
 
 		switch (varA)
 		{
-		// pierwsza operacja drukuje wartosci tablicy
+		// pierwsza operacja drukuje elementy tablicy
 		case 1:
 		{
 			cout << "Tablica: ";		
@@ -165,14 +165,14 @@ void MainMenu::displayArray()
 		case 5:
 		{
 			Timer timer;
-			int temp;
+			int tmp;
 			cout << "Ile elementow chcesz dodac?" << endl;
-			cin >> temp;
+			cin >> tmp;
 			timer.timerStart();				// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
 
-			if (temp > 0)
+			if (tmp > 0)
 			{
-				for (int i = 0; i < temp; i++)
+				for (int i = 0; i < tmp; i++)
 				{
 					int rnd_num = rand() % 30000;
 					array.pushBack(rnd_num);
@@ -201,7 +201,7 @@ void MainMenu::displayArray()
 		}
 		break;
 
-		// siodma operacja umozliwia dodawanie w losowym miejscu losowych elementow
+		// siodma operacja umozliwia dodawanie w losowych miejscach losowych elementow
 		case 7:
 		{
 			Timer timer;
@@ -277,7 +277,7 @@ void MainMenu::displayArray()
 			timer.timerStart();			// ilosc usuwanych liczb jest zadana przez uzytkownika
 			array.pop(tmp);
 			timer.timerStop();
-			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
+			cout << "Element zostal pomyslnie usuniety" << endl << endl;
 		}
 		break;
 
@@ -348,7 +348,7 @@ void MainMenu::displayList()
 		cout << "\n                       LISTA"								<< endl;
 		cout << "********************************************************\n"	<< endl;
 		cout << "Wybierz operacje:"												<< endl;
-		cout << "(1)  Wypisz tablice"											<< endl;
+		cout << "(1)  Wypisz liste"												<< endl;
 		cout << "(2)  Dodaj element z przodu"									<< endl;
 		cout << "(3)  Dodaj losowe elementy z przodu"							<< endl;
 		cout << "(4)  Dodaj element z tylu"										<< endl;
@@ -368,7 +368,31 @@ void MainMenu::displayList()
 
 		switch (varA)
 		{
+		// pierwsza operacja drukuje elementy listy
 		case 1:
+		{
+			cout << "Lista: ";
+			list.printList();
+		}
+		break;
+
+		// druga operacja zajmuje sie dodaniem z przodu elementu o wartosci podanej przez uzytkownika
+		case 2:
+		{
+			Timer timer;
+			int newElem;
+			cout << "Podaj wartosc elementu: ";
+			cin >> newElem;
+
+			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest jaczs wykonania operacji
+			list.pushFront(newElem);
+			timer.timerStop();
+			cout << "Element zostal pomyslnie dodany" << endl << endl;
+		}
+		break;
+
+		// trzecia operacja umozliwia dodawanie z przodu wybranej ilosci losowych elementow
+		case 3:
 		{
 			Timer timer;
 			int tmp;
@@ -385,10 +409,28 @@ void MainMenu::displayList()
 				}
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie dodane" << endl << endl;
 		}
 		break;
 
-		case 2:
+		// czwarta operacja zajmuje sie dodaniem z tylu elementu o wartosci podanej przez uzytkownika
+		case 4:
+		{
+			Timer timer;
+			int newElem;
+			cout << "Podaj wartosc elementu: ";
+			cin >> newElem;
+
+			timer.timerStart();			// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+			list.pushBack(newElem);
+			timer.timerStop();
+			cout << "Element zostal pomyslnie dodany" << endl << endl;
+
+		}
+		break;
+
+		// piata operacja umozliwia dodawanie z tylu wybranej ilosci losowych elementow
+		case 5:
 		{
 			Timer timer;
 			int tmp;
@@ -408,7 +450,26 @@ void MainMenu::displayList()
 		}
 		break;
 
-		case 3:
+		// szosta operacja zajmuje sie dodaniem elementu w wybranym miejscu i wartosci przez uzytkownika
+		case 6:
+		{
+			Timer timer;
+			int newElem;
+			int position;
+			cout << "Podaj wartosc elementu: ";
+			cin >> newElem;
+			cout << "Podaj pozycje elementu (pozycja liczona od 0): ";
+			cin >> position;
+
+			timer.timerStart();					// w wypadku operacji dodawania, usuwania oraz wyszukiwania elementow w kazdej strukturze liczony jest czas wykonania operacji
+			list.putBefore(position, newElem);
+			timer.timerStop();
+			cout << "Element zostal pomyslnie dodany" << endl << endl;
+		}
+		break;
+
+		// siodma operacja umozliwia dodawanie w losowych miejscach losowych elementow
+		case 7:
 		{
 			Timer timer;
 			int tmp;
@@ -423,10 +484,12 @@ void MainMenu::displayList()
 				list.putBefore(rnd1, rnd);
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie dodane" << endl << endl;
 		}
 		break;
 
-		case 4:
+		//  osma operacja zajmuje sie usuwaniem z przodu podanej przez uzytkownika liczby elementow
+		case 8:
 		{
 			Timer timer;
 			int tmp;
@@ -445,7 +508,8 @@ void MainMenu::displayList()
 		}
 		break;
 
-		case 5:
+		// dziewiata operacja zajmuje sie usuwaniem z tylu podanej przez uzytkownika liczby elementow
+		case 9:
 		{
 			Timer timer;
 			int tmp;
@@ -461,10 +525,27 @@ void MainMenu::displayList()
 				}
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
 		}
 		break;
 
-		case 6:
+		// dziesiata operacja umozliwia usuwanie elementu z wybranej przez uzytkownika pozycji
+		case 10:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Z jakiej pozycji ma zostac usuniety element? (pozycja liczona od 0)" << endl;
+			cin >> tmp;
+
+			timer.timerStart();			// ilosc usuwanych liczb jest zadana przez uzytkownika
+			list.popRandom(tmp);
+			timer.timerStop();
+			cout << "Element zostaly pomyslnie usuniety" << endl << endl;
+		}
+		break;
+
+		// jedenasta operacja zajmuje sie usuwaniem wybranej liczby elementow z losowych pozycji
+		case 11:
 		{
 			Timer timer;
 			int tmp;
@@ -478,16 +559,12 @@ void MainMenu::displayList()
 				list.popRandom(rnd);
 			}
 			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
 		}
 		break;
 
-		case 7:
-		{
-			list.printList();
-		}
-		break;
-
-		case 8:
+		// dwunasta operacja pozwala wyszukiwac elementy po wartosci
+		case 12:
 		{
 			Timer timer;
 			int tmp;
@@ -499,7 +576,8 @@ void MainMenu::displayList()
 		}
 		break;
 
-		case 9:
+		// trzynasta operacja umozliwia powrot do menu glownego
+		case 13:
 		{
 			exitA = false;
 		}
