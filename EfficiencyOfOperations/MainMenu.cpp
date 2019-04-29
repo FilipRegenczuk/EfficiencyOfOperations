@@ -744,4 +744,110 @@ void MainMenu::displayTree()
 	cin >> elemNumber;
 
 	tree.readFile(elemNumber);
+
+	while (exitA)
+	{
+		cout << "               DRZEWO CZERWONO-CZARNE"							<< endl;
+		cout << "********************************************************\n"	<< endl;
+		cout << "Wybierz operacje: "											<< endl;
+		cout << "(1) Wypisz drzewo"												<< endl;
+		cout << "(2) Dodaj elementy"											<< endl;
+		cout << "(3) Usun element"				/* usuwa korzen */				<< endl;
+		cout << "(4) Usun wybrany element"		/* usuwa wybrany element */		<< endl;
+		cout << "(5) Wyszukaj element"											<< endl;
+		cout << "(6) Wroc do menu glownego"										<< endl;
+
+		cout << "Wybrana operacja: ";
+		cin >> varA;
+		cout << endl;
+
+		switch (varA)
+		{
+		// pierwsza operacja drukuje elementy listy
+		case 1:
+		{
+			cout << "Drzewo czerwono-czarne: ";
+			tree.printTree("", "", tree.root);
+		}
+		break;
+
+		// druga operacja umozliwia dodawanie wybranej ilosci losowych elementow
+		case 2:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz dodac?" << endl;
+			cin >> tmp;
+
+			timer.timerStart();		// generacja losowych liczb, ich ilosc jest zadana przez uzytkownika
+			if (tmp > 0)
+			{
+				for (int i = 0; i < tmp; i++)
+				{
+					int rnd = rand() % 30000;
+					tree.insert(rnd);
+				}
+			}
+			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie dodane" << endl << endl;
+		}
+		break;
+
+		// trzecia operacja zajmuje sie usuwaniem podanej liczby korzeni
+		case 3:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Ile elementow chcesz usunac" << endl;
+			cin >> tmp;											// uzytkownik podaje liczbe usuwanych wartosci
+
+			timer.timerStart(); 
+			if (tmp > 0)
+			{
+				for (int i = 0; i < tmp; i++)
+				{
+					tree.removeNode(tree.root);
+				}
+			}
+			timer.timerStop();
+			cout << "Elementy zostaly pomyslnie usuniete" << endl << endl;
+		}
+		break;
+
+		// czwarta operacja umozliwia usuniecie wybranego przez uzytkownika elementu drzewa
+		case 4:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Jaki element chcesz usunac?" << endl;
+			cin >> tmp;
+
+			timer.timerStart();			 // istnieje mozliwosc usuniecia wybranego elementu
+			tree.removeNode(tree.findElement(tmp));
+			timer.timerStop();
+			cout << "Element zostal pomyslnie usuniety" << endl << endl;
+		}
+		break;
+
+		// piata operacja pozwala wyszukiwac elementy
+		case 5:
+		{
+			Timer timer;
+			int tmp;
+			cout << "Jaki element chcesz wyszukac?" << endl;
+			cin >> tmp;			// uzytkownik podaje wyszukiwany element
+
+			timer.timerStart(); 
+			tree.findElement(tmp);
+			timer.timerStop();
+		}
+		break;
+
+		case 6:
+		{
+			exitA = false;
+		}
+		break;
+		}
+	}
 }
