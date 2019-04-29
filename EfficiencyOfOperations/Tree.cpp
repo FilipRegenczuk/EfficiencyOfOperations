@@ -111,11 +111,11 @@ void Tree::rot_left(Node * A)
 		B->up = p;		// B zyskuje ojca A
 		A->up = B;		// ojcem A staje siê B
 
-		if (p != &Guard) //A nie by³ wczeœniej rootem
+		if (p != &Guard)	// A nie by³ wczeœniej rootem
 		{
 			if (p->left == A) p->left = B; else p->right = B;
 		}
-		else root = B; //jeœli A by³ rootem
+		else root = B;		// jeœli A by³ rootem
 	}
 }
 
@@ -124,22 +124,23 @@ void Tree::rot_right(Node * A)
 {
 	Node * B, *p;
 
-	B = A->left;  //B staje sie lewym dzieckiem A
-	if (B != &Guard)  //B staje sie lewym dzieckiem A
+	B = A->left;		// B staje sie lewym dzieckiem A
+	if (B != &Guard)	// B staje sie lewym dzieckiem A
 	{
-		p = A->up;   //zapamietujemy wskaŸnik na ojca A
-		A->left = B->right; //lewe dziecko A staje sie prawym dzieckiem B
-		if (A->left != &Guard) A->left->up = A;  //ustawiamy ojsca dla niegdyæ prawego dziecka B
+		p = A->up;				// zapamietujemy wskaŸnik na ojca A
+		A->left = B->right;		// lewe dziecko A staje sie prawym dzieckiem B
 
-		B->right = A; //A stajê siê prawym dzieckiem B
-		B->up = p;    //B zyskuje ojca A
-		A->up = B;    //ojcem A staje siê B
+		if (A->left != &Guard) A->left->up = A;  // ustawiamy ojsca dla niegdyæ prawego dziecka B
 
-		if (p != &Guard)   //A nie by³ wczeœniej rootem
+		B->right = A;	// A stajê siê prawym dzieckiem B
+		B->up = p;		// B zyskuje ojca A
+		A->up = B;      // ojcem A staje siê B
+
+		if (p != &Guard)   // A nie by³ wczeœniej rootem
 		{
 			if (p->left == A) p->left = B; else p->right = B;
 		}
-		else root = B; //jeœli A by³ rootem
+		else root = B;	// jeœli A by³ rootem
 	}
 }
 
@@ -148,27 +149,27 @@ void Tree::insert(int keyt)
 {
 	Node *X, *Y;
 
-	X = new Node;        // Tworzymy nowy wêze³
-	X->left = &Guard;          // pocz¹tkowo dzieci wskazuj¹ na stra¿nika
+	X = new Node;        // tworzymy nowy wêze³
+	X->left = &Guard;    // pocz¹tkowo dzieci wskazuj¹ na stra¿nika
 	X->right = &Guard;
-	X->up = root;        //pocz¹tkowo rodzis wskazuje na korzeñ
+	X->up = root;        // pocz¹tkowo rodzis wskazuje na korzeñ
 	X->key = keyt;
-	if (X->up == &Guard) root = X; // je¿eli X jest pierwszym elementem w drzewie to staje siê on korzeniem
+	if (X->up == &Guard) root = X;	// je¿eli X jest pierwszym elementem w drzewie to staje siê on korzeniem
 	else
-		while (true)             // je¿eli nie jest pierwszyn elementem
+		while (true)			// je¿eli nie jest pierwszyn elementem
 		{
-			if (keyt < X->up->key)    // sprawdzamy wartosc rodzina i nowego elementu
+			if (keyt < X->up->key)			// sprawdzamy wartosc rodzina i nowego elementu
 			{
-				if (X->up->left == &Guard)  //sprzwdzamy czy lewe dziecko jest wolne
+				if (X->up->left == &Guard)  // sprawdzamy czy lewe dziecko jest wolne
 				{
-					X->up->left = X;  // X staje siê lewym dzieckiem swojefo obecnego rodzica
+					X->up->left = X;		// X staje siê lewym dzieckiem swojefo obecnego rodzica
 					break;
 				}
-				X->up = X->up->left; // schodzimy poziom ni¿ej
+				X->up = X->up->left;		// schodzimy poziom ni¿ej
 			}
 			else
 			{
-				if (X->up->right == &Guard)   //to samo co powy¿ej tylko dla elementu o wiêkszej wartoœci(czyli prawego)
+				if (X->up->right == &Guard)   // to samo co powy¿ej tylko dla elementu o wiêkszej wartoœci(czyli prawego)
 				{
 					X->up->right = X;
 					break;
@@ -177,37 +178,40 @@ void Tree::insert(int keyt)
 			}
 		}
 	X->color = 'R';         // zawsze nowy element ma kolor czerwony
-	while ((X != root) && (X->up->color == 'R'))  //&& wykonuje siê dopóki rodzic jest czerwony
-	{
-		if (X->up == X->up->up->left) //sprawdzamy czy nas ojciec jest prawym czy lewym elementem
-		{
-			Y = X->up->up->right; // Y staje siê wujkiem, czyli drugim liœciem ko³o ojca
 
-			if (Y->color == 'R')  // Przypadek 1 - wujek i ojciec maj¹ ten sam kolor
+	while ((X != root) && (X->up->color == 'R'))	// && wykonuje siê dopóki rodzic jest czerwony
+	{
+		if (X->up == X->up->up->left)		// sprawdzamy czy nas ojciec jest prawym czy lewym elementem
+		{
+			Y = X->up->up->right;			// Y staje siê wujkiem, czyli drugim liœciem ko³o ojca
+
+			if (Y->color == 'R')		// Przypadek 1 - wujek i ojciec maj¹ ten sam kolor
 			{
-				X->up->color = 'B'; // ojciec i wujek staja sie czarni
+				X->up->color = 'B';		// ojciec i wujek staja sie czarni
 				Y->color = 'B';
-				X->up->up->color = 'R'; //dziadek staje sie czerwony
-				X = X->up->up;          //X staje siê dziadkiem
-				continue;               //pêtla kontunuuje siê by sprawdziæ czy przez zmianê koloru dziadka nic sie nie zepsulo
+				X->up->up->color = 'R';		// dziadek staje sie czerwony
+				X = X->up->up;				// X staje siê dziadkiem
+				continue;					// pêtla kontunuuje siê by sprawdziæ czy przez zmianê koloru dziadka nic sie nie zepsulo
 			}
 
 			if (X == X->up->right) // Przypadek 2 - jeœli nowy element jest prawym dzieckiem
 			{
-				X = X->up;          //X staje siê ojcem
-				rot_left(X);           //rotujemy w lewo
+				X = X->up;          // X staje siê ojcem
+				rot_left(X);        //rotujemy w lewo
 			}
+
 			// Przypadek 3 -  nowy element jest lewym dzieckiem lub po rotacji nowy element staje siê lewym dzieckiem
-			X->up->color = 'B';   //rodzica kolorujemy na czarno
-			X->up->up->color = 'R'; //dziadek na czerwono
-			rot_right(X->up->up);     //rotacja w prawo dziadka
+
+			X->up->color = 'B';			// rodzica kolorujemy na czarno
+			X->up->up->color = 'R';		// dziadek na czerwono
+			rot_right(X->up->up);		// rotacja w prawo dziadka
 			break;
 		}
 		else
-		{                  // Przypadki lustrzane
+		{								 // Przypadki lustrzane
 			Y = X->up->up->left;
 
-			if (Y->color == 'R') // Przypadek 1
+			if (Y->color == 'R')	// Przypadek 1
 			{
 				X->up->color = 'B';
 				Y->color = 'B';
@@ -216,19 +220,19 @@ void Tree::insert(int keyt)
 				continue;
 			}
 
-			if (X == X->up->left) // Przypadek 2
+			if (X == X->up->left)	// Przypadek 2
 			{
 				X = X->up;
 				rot_right(X);
 			}
 
-			X->up->color = 'B'; // Przypadek 3
+			X->up->color = 'B';		// Przypadek 3
 			X->up->up->color = 'R';
 			rot_left(X->up->up);
 			break;
 		}
 	}
-	root->color = 'B'; //root zawsze musi byæ czarny
+	root->color = 'B';		 // root zawsze musi byæ czarny
 }
 
 void Tree::remove_node(Node * X)
@@ -237,13 +241,13 @@ void Tree::remove_node(Node * X)
 	{
 		Node * W, *Y, *Z;
 
-		if ((X->left == &Guard) || (X->right == &Guard)) Y = X; //jezeli X nie ma potomka lub ma jednego, wtedy Y staje sie X
-		else                                    Y = next_node(X); //jezeli nie Y staje siê nastêpnikiem X
+		if ((X->left == &Guard) || (X->right == &Guard)) Y = X;		// jezeli X nie ma potomka lub ma jednego, wtedy Y staje sie X
+		else                                    Y = next_node(X);	// jezeli nie Y staje siê nastêpnikiem X
 
-		if (Y->left != &Guard) Z = Y->left; //je¿eli Y ma lewego potomka to Z staje siê lewym dzieckiem Y
-		else              Z = Y->right;//jesli nie to Z staje sie prawym potomkiem Y
+		if (Y->left != &Guard) Z = Y->left;		// je¿eli Y ma lewego potomka to Z staje siê lewym dzieckiem Y
+		else              Z = Y->right;			// jesli nie to Z staje sie prawym potomkiem Y
 
-		Z->up = Y->up;  //
+		Z->up = Y->up;
 
 		if (Y->up == &Guard) root = Z;
 		else if (Y == Y->up->left) Y->up->left = Z;
@@ -251,14 +255,14 @@ void Tree::remove_node(Node * X)
 
 		if (Y != X) X->key = Y->key;
 
-		if (Y->color == 'B')   // Naprawa struktury drzewa czerwono-czarnego
+		if (Y->color == 'B')	// Naprawa struktury drzewa czerwono-czarnego
 			while ((Z != root) && (Z->color == 'B'))
 				if (Z == Z->up->left)
 				{
 					W = Z->up->right;
 
 					if (W->color == 'R')
-					{              // Przypadek 1
+					{							// Przypadek 1
 						W->color = 'B';
 						Z->up->color = 'R';
 						rot_left(Z->up);
@@ -266,32 +270,32 @@ void Tree::remove_node(Node * X)
 					}
 
 					if ((W->left->color == 'B') && (W->right->color == 'B'))
-					{              // Przypadek 2
+					{							// Przypadek 2
 						W->color = 'R';
 						Z = Z->up;
 						continue;
 					}
 
 					if (W->right->color == 'B')
-					{              // Przypadek 3
+					{							// Przypadek 3
 						W->left->color = 'B';
 						W->color = 'R';
 						rot_right(W);
 						W = Z->up->right;
 					}
 
-					W->color = Z->up->color; // Przypadek 4
+					W->color = Z->up->color;	// Przypadek 4
 					Z->up->color = 'B';
 					W->right->color = 'B';
 					rot_left(Z->up);
 					Z = root;         // To spowoduje zakonczenie petli
 				}
 				else
-				{                // Przypadki lustrzane
+				{					// Przypadki lustrzane
 					W = Z->up->left;
 
 					if (W->color == 'R')
-					{              // Przypadek 1
+					{							// Przypadek 1
 						W->color = 'B';
 						Z->up->color = 'R';
 						rot_right(Z->up);
@@ -299,25 +303,25 @@ void Tree::remove_node(Node * X)
 					}
 
 					if ((W->left->color == 'B') && (W->right->color == 'B'))
-					{              // Przypadek 2
+					{							// Przypadek 2
 						W->color = 'R';
 						Z = Z->up;
 						continue;
 					}
 
 					if (W->left->color == 'B')
-					{              // Przypadek 3
+					{							// Przypadek 3
 						W->right->color = 'B';
 						W->color = 'R';
 						rot_left(W);
 						W = Z->up->left;
 					}
 
-					W->color = Z->up->color;  // Przypadek 4
+					W->color = Z->up->color;	// Przypadek 4
 					Z->up->color = 'B';
 					W->left->color = 'B';
 					rot_right(Z->up);
-					Z = root;         // To spowoduje zakonczenie petli
+					Z = root;         // to spowoduje zakonczenie petli
 				}
 
 		Z->color = 'B';
@@ -326,7 +330,7 @@ void Tree::remove_node(Node * X)
 	}
 }
 
-void Tree::read_file(int val) //takie samo jak w innych strukturach
+void Tree::read_file(int val)	 // takie samo jak w innych strukturach
 {
 	string stri;
 	fstream file("20000.txt", ios::in);
