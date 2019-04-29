@@ -6,6 +6,7 @@
 #include "Array.h"
 #include "List.h"
 #include "Heap.h"
+#include "Tree.h"
 
 using namespace std;
 
@@ -733,4 +734,14 @@ void MainMenu::displayHeap()
 
 void MainMenu::displayTree()
 {
+	bool exitA = true;
+	int varA;
+	int elemNumber;
+	Tree tree;
+
+	cout << "Z ilu elementow ma byc zbudowane drzewo?" << endl;
+	cout << "Wprowadz wartosc: ";
+	cin >> elemNumber;
+
+	tree.readFile(elemNumber);
 }

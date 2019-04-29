@@ -51,7 +51,7 @@ void Tree::printTree(string sp, string sn, Node * p)
 }
 
 
-Node *Tree::find_element(int keyt)
+Node *Tree::findElement(int keyt)
 {
 	Node * p;
 
@@ -66,7 +66,7 @@ Node *Tree::find_element(int keyt)
 }
 
 
-Node * Tree::min_node(Node * p)
+Node * Tree::minNode(Node * p)
 {
 	if (p != &Guard)								// jesli p nie jest straznikiem
 		while (p->left != &Guard) p = p->left;		// idziemy jak najdalej w prawo
@@ -74,13 +74,13 @@ Node * Tree::min_node(Node * p)
 }
 
 
-Node * Tree::next_node(Node * p)
+Node * Tree::nextNode(Node * p)
 {
 	Node * r;
 
 	if (p != &Guard)		// jeslli p nie jest straznikiem
 	{
-		if (p->right != &Guard) return min_node(p->right);		// jesli prawe nie jest straznikiem to szukamy najmniejszego na prawo
+		if (p->right != &Guard) return minNode(p->right);		// jesli prawe nie jest straznikiem to szukamy najmniejszego na prawo
 		else													//jesli nastepnik jest na gorze
 		{
 			r = p->up;
@@ -96,7 +96,7 @@ Node * Tree::next_node(Node * p)
 }
 
 
-void Tree::rot_left(Node * A)
+void Tree::rotLeft(Node * A)
 {
 	Node * B, *p;
 
@@ -120,7 +120,7 @@ void Tree::rot_left(Node * A)
 }
 
 
-void Tree::rot_right(Node * A)
+void Tree::rotRight(Node * A)
 {
 	Node * B, *p;
 
@@ -197,14 +197,14 @@ void Tree::insert(int keyt)
 			if (X == X->up->right) // Przypadek 2 - jeœli nowy element jest prawym dzieckiem
 			{
 				X = X->up;          // X staje siê ojcem
-				rot_left(X);        //rotujemy w lewo
+				rotLeft(X);        //rotujemy w lewo
 			}
 
 			// Przypadek 3 -  nowy element jest lewym dzieckiem lub po rotacji nowy element staje siê lewym dzieckiem
 
 			X->up->color = 'B';			// rodzica kolorujemy na czarno
 			X->up->up->color = 'R';		// dziadek na czerwono
-			rot_right(X->up->up);		// rotacja w prawo dziadka
+			rotRight(X->up->up);		// rotacja w prawo dziadka
 			break;
 		}
 		else
@@ -223,29 +223,29 @@ void Tree::insert(int keyt)
 			if (X == X->up->left)	// Przypadek 2
 			{
 				X = X->up;
-				rot_right(X);
+				rotRight(X);
 			}
 
 			X->up->color = 'B';		// Przypadek 3
 			X->up->up->color = 'R';
-			rot_left(X->up->up);
+			rotLeft(X->up->up);
 			break;
 		}
 	}
 	root->color = 'B';		 // root zawsze musi byæ czarny
 }
 
-void Tree::remove_node(Node * X)
+void Tree::removeNode(Node * X)
 {
 	if (X)
 	{
 		Node * W, *Y, *Z;
 
 		if ((X->left == &Guard) || (X->right == &Guard)) Y = X;		// jezeli X nie ma potomka lub ma jednego, wtedy Y staje sie X
-		else                                    Y = next_node(X);	// jezeli nie Y staje siê nastêpnikiem X
+		else Y = nextNode(X);										// jezeli nie Y staje siê nastêpnikiem X
 
 		if (Y->left != &Guard) Z = Y->left;		// je¿eli Y ma lewego potomka to Z staje siê lewym dzieckiem Y
-		else              Z = Y->right;			// jesli nie to Z staje sie prawym potomkiem Y
+		else Z = Y->right;						// jesli nie to Z staje sie prawym potomkiem Y
 
 		Z->up = Y->up;
 
@@ -265,7 +265,7 @@ void Tree::remove_node(Node * X)
 					{							// Przypadek 1
 						W->color = 'B';
 						Z->up->color = 'R';
-						rot_left(Z->up);
+						rotLeft(Z->up);
 						W = Z->up->right;
 					}
 
@@ -280,14 +280,14 @@ void Tree::remove_node(Node * X)
 					{							// Przypadek 3
 						W->left->color = 'B';
 						W->color = 'R';
-						rot_right(W);
+						rotRight(W);
 						W = Z->up->right;
 					}
 
 					W->color = Z->up->color;	// Przypadek 4
 					Z->up->color = 'B';
 					W->right->color = 'B';
-					rot_left(Z->up);
+					rotLeft(Z->up);
 					Z = root;         // To spowoduje zakonczenie petli
 				}
 				else
@@ -298,7 +298,7 @@ void Tree::remove_node(Node * X)
 					{							// Przypadek 1
 						W->color = 'B';
 						Z->up->color = 'R';
-						rot_right(Z->up);
+						rotRight(Z->up);
 						W = Z->up->left;
 					}
 
@@ -313,14 +313,14 @@ void Tree::remove_node(Node * X)
 					{							// Przypadek 3
 						W->right->color = 'B';
 						W->color = 'R';
-						rot_left(W);
+						rotLeft(W);
 						W = Z->up->left;
 					}
 
 					W->color = Z->up->color;	// Przypadek 4
 					Z->up->color = 'B';
 					W->left->color = 'B';
-					rot_right(Z->up);
+					rotRight(Z->up);
 					Z = root;         // to spowoduje zakonczenie petli
 				}
 
@@ -330,7 +330,7 @@ void Tree::remove_node(Node * X)
 	}
 }
 
-void Tree::read_file(int val)	 // takie samo jak w innych strukturach
+void Tree::readFile(int val)	 // takie samo jak w innych strukturach
 {
 	string stri;
 	fstream file("20000.txt", ios::in);
