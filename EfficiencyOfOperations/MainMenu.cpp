@@ -602,7 +602,7 @@ void MainMenu::displayHeap()
 
 	while (exitA)
 	{
-		cout << "                        KOPIEC"								<< endl;
+		cout << "\n                        KOPIEC"								<< endl;
 		cout << "********************************************************\n"	<< endl;
 		cout << "Wybierz operacje: "											<< endl;
 		cout << "(1) Wypisz kopiec"												<< endl;
@@ -747,15 +747,15 @@ void MainMenu::displayTree()
 
 	while (exitA)
 	{
-		cout << "               DRZEWO CZERWONO-CZARNE"							<< endl;
+		cout << "\n               DRZEWO CZERWONO-CZARNE"						<< endl;
 		cout << "********************************************************\n"	<< endl;
 		cout << "Wybierz operacje: "											<< endl;
 		cout << "(1) Wypisz drzewo"												<< endl;
 		cout << "(2) Dodaj elementy"											<< endl;
-		cout << "(3) Usun element"				/* usuwa korzen */				<< endl;
+		cout << "(3) Usun elementy"				/* usuwa korzenie */			<< endl;
 		cout << "(4) Usun wybrany element"		/* usuwa wybrany element */		<< endl;
 		cout << "(5) Wyszukaj element"											<< endl;
-		cout << "(6) Wroc do menu glownego"										<< endl;
+		cout << "(6) Wroc do menu glownego\n"									<< endl;
 
 		cout << "Wybrana operacja: ";
 		cin >> varA;
@@ -766,7 +766,7 @@ void MainMenu::displayTree()
 		// pierwsza operacja drukuje elementy listy
 		case 1:
 		{
-			cout << "Drzewo czerwono-czarne: ";
+			cout << "Drzewo czerwono-czarne:\n";
 			tree.printTree("", "", tree.root);
 		}
 		break;

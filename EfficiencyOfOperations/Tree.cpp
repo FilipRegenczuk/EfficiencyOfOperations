@@ -61,7 +61,7 @@ Node *Tree::findElement(int keyt)
 		if (keyt < p->key) p = p->left;				// przesuwamy sie w lewo badz prawo w zaleznosci od stosunku wartosci do wartosci wyszukiwanej
 		else           p = p->right;
 
-	if (p == &Guard) return NULL;			//jesli nie ma elementu to zwracamy null
+	if (p == &Guard) return NULL;			// jesli nie ma elementu to zwracamy null
 	return p;
 }
 
