@@ -128,6 +128,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
